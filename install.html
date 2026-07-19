@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Premium Action Button</title>
+  <style>
+    /* Dark cyber background to make the blue/green neon glow pop */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #0b0f19;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Core Button Styles - Blue Gradient & 12px Rounded Corners */
+    .install-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 45px; /* Upgraded padding for a strong premium feel */
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(45deg, #00bfff, #008cff);
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none;
+      /* Combined premium bouncy feel and standard timing */
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Hover State - Intense Blue Glow and Lift */
+    .install-btn:hover:not(.is-loading):not(.is-success) {
+      box-shadow: 0 0 25px #00bfff;
+      transform: translateY(-3px);
+    }
+
+    /* Active State - Tactile click/depress feedback */
+    .install-btn:active:not(.is-loading):not(.is-success) {
+      transform: translateY(1px) scale(0.97);
+    }
+
+    /* Text State Visibilities */
+    .btn-text, .success-text {
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .success-text {
+      position: absolute;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    /* Spinner Design */
+    .spinner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      animation: rotate 1s linear infinite;
+    }
+
+    .spinner circle {
+      stroke: #ffffff;
+      stroke-linecap: round;
+      animation: dash 1.5s ease-in-out infinite;
+    }
+
+    /* Loading State Overrides */
+    .install-btn.is-loading {
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+    }
+
+    .install-btn.is-loading .btn-text {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .install-btn.is-loading .spinner {
+      opacity: 1;
+    }
+
+    /* Success State Overrides - Transforms to a rich green gradient */
+    .install-btn.is-success {
+      background: linear-gradient(45deg, #00ff88, #00b862);
+      cursor: default;
+      transform: none !important;
+      box-shadow: 0 0 25px #00ff88;
+    }
+
+    .install-btn.is-success .spinner {
+      opacity: 0;
+      transition: opacity 0.1s ease;
+    }
+
+    .install-btn.is-success .success-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Dynamic Message Banner Below Button */
+    #message {
+      margin-top: 25px;
+      color: #00ff88;
+      font-weight: bold;
+      font-size: 16px;
+      min-height: 24px; /* Prevents layout shifting when blank */
+      transition: all 0.3s ease;
+      font-family: monospace;
+      letter-spacing: 1px;
+    }
+
+    /* Keyframe Spin Animations */
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+      }
+      100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Combined Accessible Button -->
+  <button class="install-btn" id="installBtn" aria-live="polite">
+    <span class="btn-text">Install Now</span>
+    <span class="success-text">Installed! ✓</span>
+    <svg class="spinner" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+    </svg>
+  </button>
+
+  <!-- Combined Status Message Display -->
+  <div id="message"></div>
+
+  <script>
+    const btn = document.getElementById('installBtn');
+    const msg = document.getElementById('message');
+
+    btn.addEventListener('click', () => {
+      // Prevent multiple activations while executing
+      if (btn.classList.contains('is-loading') || btn.classList.contains('is-success')) return;
+
+      // 1. Loading Phase
+      btn.classList.add('is-loading');
+      msg.style.color = '#00bfff';
+      msg.textContent = 'CONNECTING TO SERVER...';
+
+      // 2. Simulated Process Completion (2.5 seconds)
+      setTimeout(() => {
+        btn.classList.remove('is-loading');
+        btn.classList.add('is-success');
+        msg.style.color = '#00ff88';
+        msg.textContent = 'PROCESS COMPLETED SUCCESSFULLY!';
+
+        // 3. Optional Auto Reset (4 seconds)
+        setTimeout(() => {
+          btn.classList.remove('is-success');
+          msg.textContent = '';
+        }, 4000);
+
+      }, 2500);
+    });
+  </script>
+
+</body>
+</html>
