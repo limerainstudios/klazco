@@ -1,89 +1,56 @@
-<script type="module">
+<!DOCTYPE html>
 
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+<html>
 
-import { 
-getAuth,
-GoogleAuthProvider,
-signInWithPopup
-} 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+<head>
+
+<title>Klazco Login</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
 
 
-const firebaseConfig = {
+<body>
 
-apiKey: "AIzaSyAv0iD_j4ROg5CL5DaGmMZfE8J7TdZ8jbg",
 
-authDomain: "klazco-vps.firebaseapp.com",
+<header>
 
-projectId: "klazco-vps",
+<div class="logo">
+Klazco VPS
+</div>
 
-storageBucket: "klazco-vps.firebasestorage.app",
-
-messagingSenderId: "357160450539",
-
-appId: "1:357160450539:web:c48c68c56d693bad8301ae",
-
-measurementId: "G-9NW857W51Q"
-
-};
+</header>
 
 
 
-const app = initializeApp(firebaseConfig);
+<section class="hero">
 
 
-const auth = getAuth(app);
+<h1>
+Login
+<span>To Klazco</span>
+</h1>
 
 
-const provider = new GoogleAuthProvider();
+<p>
+Access your Klazco dashboard.
+</p>
 
 
-
-document
-.getElementById("googleLogin")
-.addEventListener("click", async()=>{
-
-
-try{
-
-
-const result = await signInWithPopup(
-auth,
-provider
-);
+<button id="googleLogin">
+Login With Google
+</button>
 
 
 
-const user = result.user;
-
-
-console.log("Logged in:", user);
+</section>
 
 
 
-alert(
-"Welcome " + user.displayName
-);
+<script type="module" src="login.js"></script>
 
 
+</body>
 
-window.location.href="../dashboard/";
-
-
-}
-
-catch(error){
-
-console.error(error);
-
-alert(error.message);
-
-}
-
-
-});
-
-
-</script>
+</html>
