@@ -4,9 +4,9 @@
 
 <head>
 
-<title>Klazco Dashboard</title>
+<title>Klazco Panel</title>
 
-<link rel="stylesheet" href="../dashboard.css">
+<link rel="stylesheet" href="dashboard.css">
 
 </head>
 
@@ -14,150 +14,92 @@
 <body>
 
 
-<header class="dashboard-header">
+<div class="sidebar">
 
-<div class="logo">
-Klazco VPS
+<h1>
+Klazco
+</h1>
+
+
+<a>Dashboard</a>
+<a>Servers</a>
+<a>Billing</a>
+<a>Support</a>
+
+
 </div>
 
 
-<div>
-Account
-</div>
 
 
-</header>
+<div class="main">
 
-
-
-<div class="dashboard">
-
-
-<div class="welcome">
 
 <h1>
 Welcome back,
-<span>Lime</span>
+<span id="name">
+Loading...
+</span>
 </h1>
 
-<p>
-User ID:
-001-234-123
-</p>
-
-</div>
 
 
+<div class="glass">
 
-<div class="stats">
-
-
-<div class="box">
 
 <h2>
-Plan
-</h2>
-
-<div class="value">
-FREE
-</div>
-
-</div>
-
-
-
-<div class="box">
-
-<h2>
-Server Status
-</h2>
-
-<div class="online">
-🟢 Online
-</div>
-
-</div>
-
-
-
-<div class="box">
-
-<h2>
-Location
-</h2>
-
-<div class="value">
-Singapore
-</div>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="stats" style="margin-top:30px">
-
-
-<div class="box">
-
-<h2>
-CPU Usage
+Account
 </h2>
 
 
 <p>
-25%
+Email:
+<span id="email">
+</span>
 </p>
 
 
-<div class="progress">
-<div style="width:25%">
-</div>
-</div>
+<p>
+Klazco ID:
+<span id="id">
+</span>
+</p>
+
+
+<p>
+Plan:
+<span id="plan">
+</span>
+</p>
 
 
 </div>
 
 
 
-<div class="box">
+
+<div class="glass">
+
 
 <h2>
-RAM Usage
+Services
 </h2>
 
 
 <p>
-250MB / 1GB
+No active servers.
 </p>
 
 
-<div class="progress">
-
-<div style="width:30%">
 </div>
 
-</div>
-
-
-</div>
 
 
 </div>
 
 
 
-
-<a class="dashboard-button">
-Manage VPS
-</a>
-
-
-</div>
+<script type="module" src="dashboard.js"></script>
 
 
 </body>
